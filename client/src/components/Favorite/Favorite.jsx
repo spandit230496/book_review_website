@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Grid } from '@mui/material'; 
 import BookCard from '../bookCard/BookCard';
+import axios from 'axios';
 
 const Favorite = () => {
-  const bookmarked = useSelector((state) => state.books.bookmarked);
+  // const bookmarked = useSelector((state) => state.books.bookmarked);
+  const [bookmarked,setBookmarked]= useState([])
 
+  const getFavorites = async () => {
+
+    try{
+      const {data} = await axios.get('http://localhost:5000/bookmarked/'+localStorage.getItem('userId'));
+      setBookmarked(data)
+    }
+    catch(e){
+      
+    }
+  }
+
+  useEffect(() => {
+    getFavorites();
+  }, []);
   const hasBookmarks = bookmarked && bookmarked.length > 0;
 
   return (

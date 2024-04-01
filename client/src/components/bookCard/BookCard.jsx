@@ -30,7 +30,6 @@ export default function BookCard({
 
   const handleBookmarkClick = async (event) => {
     event.stopPropagation(); 
-    //console.log("hello")
     try{
        console.log(localStorage.getItem('userId'))
        console.log(id);
